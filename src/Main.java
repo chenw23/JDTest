@@ -6,6 +6,10 @@ public class Main {
         Scanner input;
         input = new Scanner(System.in);
         int m = input.nextInt();
+        if (m == 1) {
+            System.out.println(1);
+            return;
+        }
         input.nextLine();
         Tree tree = new Tree(m);
         ArrayList<Tree.Node> list = tree.tree;

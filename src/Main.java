@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -6,24 +7,45 @@ public class Main {
 
         input = new Scanner(System.in);
         int m = input.nextInt();
-        int n = input.nextInt();
         input.nextLine();
-        Graph graph = new Graph(m);
-        for (int i = 0; i < n; i++) {
-            int startEdge = input.nextInt() - 1;
-            int finishEdge = input.nextInt() - 1;
-            graph.vertices.get(startEdge).adj.add(graph.vertices.get(finishEdge));
+        Tree tree = new Tree(m);
+        ArrayList<Tree.Node> list = tree.tree;
+        for (int i = 0; i < m - 1; i++) {
+            int a = input.nextInt() - 1;
+            int b = input.nextInt() - 1;
+            int parentNode = Math.min(a, b);
+            int childNode = Math.max(a, b);
+            list.get(parentNode).childrenNode.add(list.get(childNode));
+            list.get(childNode).parent = list.get(parentNode);
             input.nextLine();
         }
 
 
-        long time = System.currentTimeMillis();
-        graph.PERT();
-        System.out.println("The time is " + (System.currentTimeMillis() - time));
-        int distance = 0;
-        for (Vertex vertex : graph.vertices)
-            if (vertex.d > distance)
-                distance = vertex.d;
-        System.out.println(distance);
+    }
+
+}
+
+class Tree {
+    ArrayList<Node> tree;
+
+    public Tree(int m) {
+        tree = new ArrayList<>(m);
+        for (int i = 0; i < m; i++) {
+            tree.add(new Node());
+        }
+    }
+
+    class Node {
+        Node parent;
+        ArrayList<Node> childrenNode;
+
+        public Node() {
+            childrenNode = new ArrayList<>();
+        }
+
+        int childNodeNumber() {
+            if (childrenNode.size() == 0) return 0;
+            return 0;
+        }
     }
 }

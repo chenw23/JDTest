@@ -20,7 +20,6 @@ public class Main {
             int childNode = Math.max(a, b);
             list.get(parentNode).childrenNode.add(list.get(childNode));
             list.get(childNode).parent = list.get(parentNode);
-            input.nextLine();
         }
         ArrayList<Integer> size = new ArrayList<>();
         for (Tree.Node directSubNode : list.get(0).childrenNode)

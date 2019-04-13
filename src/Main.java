@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner input;
-
         input = new Scanner(System.in);
         int m = input.nextInt();
         input.nextLine();
@@ -19,10 +18,12 @@ public class Main {
             list.get(childNode).parent = list.get(parentNode);
             input.nextLine();
         }
-
-
+        ArrayList<Integer> size = new ArrayList<>();
+        for (Tree.Node directSubNode : list.get(0).childrenNode)
+            size.add(directSubNode.childNodeNumber());
+        size.sort(null);
+        System.out.println(size.get(size.size() - 1));
     }
-
 }
 
 class Tree {
@@ -44,8 +45,12 @@ class Tree {
         }
 
         int childNodeNumber() {
-            if (childrenNode.size() == 0) return 0;
-            return 0;
+            if (childrenNode.size() == 0) return 1;
+            int sum = 0;
+            for (Node node : childrenNode)
+                sum += node.childNodeNumber();
+            sum += 1;
+            return sum;
         }
     }
 }
